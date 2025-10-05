@@ -1,26 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Book = ({ boi }) => {
-  const { image } = boi;
+  const { image, bookName, tags, author } = boi;
+  const [hoverStyle, setHoverStyle] = useState(false);
 
   return (
-    <div className="card bg-base-100 shadow-sm border">
+    <div
+      onMouseEnter={() => setHoverStyle(true)}
+      onMouseLeave={() => setHoverStyle(false)}
+      className="card bg-base-100 shadow-sm border"
+    >
       <figure className="m-6 py-5 bg-gray-100">
-        <img src={image} className="h-44 skew-y-6 shadow-2xl" />
+        <img
+          src={image}
+          className={`h-44  ${
+            hoverStyle ? 'skew-y-0' : 'skew-y-6'
+          } shadow-2xl transition duration-300`}
+        />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">
-          Card Title
-          <div className="badge badge-secondary">NEW</div>
-        </h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div className="card-actions justify-end">
-          <div className="badge badge-outline">Fashion</div>
-          <div className="badge badge-outline">Products</div>
+        <div className="card-actions flex-row gap-5 text-green-500">
+          {tags.map((tag, i) => (
+            <div key={i} className="badge badge-outline">
+              {tag}
+            </div>
+          ))}
         </div>
+        <h2 className="card-title">{bookName}</h2>
+        <p>By: {author}</p>
       </div>
     </div>
   );
