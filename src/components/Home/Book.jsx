@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
 
 const Book = ({ boi }) => {
-  const { image, bookName, tags, author } = boi;
+  const { image, bookName, tags, author, bookId } = boi;
   const [hoverStyle, setHoverStyle] = useState(false);
 
   return (
-    <div
+    <Link
+      to={`/book/${bookId}`}
       onMouseEnter={() => setHoverStyle(true)}
       onMouseLeave={() => setHoverStyle(false)}
-      className="card bg-base-100 shadow-sm border"
+      className="card bg-base-100 shadow-sm border cursor-pointer"
     >
       <figure className="m-6 py-5 bg-gray-100">
         <img
@@ -29,7 +31,7 @@ const Book = ({ boi }) => {
         <h2 className="card-title">{bookName}</h2>
         <p>By: {author}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
